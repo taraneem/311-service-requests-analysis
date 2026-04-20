@@ -110,6 +110,10 @@ This window captures:
 15. What minimal data infrastructure would Egypt need to replicate this system?
 
 ---
+## Dataset
+- The original dataset is from NYC Open Data (311 Service Requests) https://data.cityofnewyork.us/Social-Services/311-Service-Requests-from-2020-to-Present/erm2-nwe9/about_data.
+- Due to size limitations, the full dataset is not included.
+- A sampled version is provided for demonstration.
 
 ## 🛠️ Tech Stack
 
