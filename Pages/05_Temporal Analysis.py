@@ -8,9 +8,14 @@ st.markdown("Temporal patterns of 311 service requests across the city.")
 st.divider()
 
 
+import gdown  
+
 @st.cache_data
 def load_data():
-    return pd.read_parquet('nyc_featured.parquet')
+    file_id = "1GZXw_sat1A0wTSMO-wyp72-shCnLaf_a"
+    url = f"https://drive.google.com/uc?id={file_id}"
+    gdown.download(url, "nyc_featured.parquet", quiet=False)
+    return pd.read_parquet("nyc_featured.parquet")
 
 df = load_data()
 df.columns = df.columns.str.lower()
