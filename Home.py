@@ -52,6 +52,8 @@ st.markdown("""
     div[data-testid="stMetricValue"] {
         color: var(--primary-teal) !important;
         font-weight: 800 !important;
+        font-size: 1.5rem !important;
+        line-height: 1.2 !important;
     }
     
     /* Info Box */
@@ -153,13 +155,13 @@ with kpi2:
     st.metric(label="Avg Response Time", value=f"{avg_response_time} days")
 with kpi3:
     st.metric(label="Busiest Borough", value=str(busiest_borough).title())
+
 with kpi4:
     st.metric(label="Top Complaint Type", value=str(top_complaint))
-
 st.write("---")
 
 # --- OVERVIEW CHART SECTION ---
-st.markdown("### Complaint Distribution by Borough")
+st.subheader("Complaint Distribution by Borough")
 
 if 'borough' in df.columns:
     borough_counts = df['borough'].value_counts().reset_index()
@@ -178,11 +180,10 @@ if 'borough' in df.columns:
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
         xaxis_title="Number of Complaints",
-        yaxis_title="",
+        yaxis_title="Borough Name",
         yaxis={'categoryorder':'total ascending'},
         font_color="#E0E0E0",
-        title_font_color="#52AB98",
-        margin=dict(l=20, r=20, t=40, b=20)
+        margin=dict(l=20, r=20, t=20, b=20)
     )
     fig.update_traces(
         texttemplate='%{text:.2s}', 
