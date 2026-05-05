@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import gdown 
+
+
 st.set_page_config(layout="wide", page_title="Complaint Analysis", page_icon="📝")
 st.title("Complaint Analysis")
 st.markdown("Complaints Analysis and Status patterns")
@@ -9,10 +10,7 @@ st.divider()
 
 @st.cache_data
 def load_data():
-    file_id = "1GZXw_sat1A0wTSMO-wyp72-shCnLaf_a"
-    url = f"https://drive.google.com/uc?id={file_id}"
-    gdown.download(url, "nyc_featured.parquet", quiet=False)
-    return pd.read_parquet("nyc_featured.parquet")
+    return pd.read_parquet("nyc_sample.parquet")
 
 df = load_data()
 df.columns = df.columns.str.lower()

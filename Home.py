@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
-import gdown 
+import plotly.express as px 
 
 st.set_page_config(
     page_title="NYC 311 Service Requests Analysis",
@@ -83,10 +82,7 @@ st.markdown("""
 
 @st.cache_data
 def load_data():
-    file_id = "1GZXw_sat1A0wTSMO-wyp72-shCnLaf_a"
-    url = f"https://drive.google.com/uc?id={file_id}"
-    gdown.download(url, "nyc_featured.parquet", quiet=False)
-    return pd.read_parquet("nyc_featured.parquet")
+    return pd.read_parquet("nyc_sample.parquet")
 
 # Standard Theme Colors
 THEME_COLORS = ["#3B5E64", "#52AB98", "#2E4F4D", "#6CA5A4", "#74BAB8", "#274C4B"]
