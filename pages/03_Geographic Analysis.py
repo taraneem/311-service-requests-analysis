@@ -83,19 +83,30 @@ with tab2:
  fig.update_layout(plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font_color="#E0E0E0")
  st.plotly_chart(fig, use_container_width=True)
 
- # Hotspot ZIP Codes
- st.markdown("### Hotspot ZIP Codes")
- plot_df = df.groupby(['borough', 'incident_zip']).size().reset_index(name='count')
- plot_df = plot_df.sort_values(['borough', 'count'] , ascending=False)
- plot_df = plot_df.groupby('borough').head(1)
+# Hotspot ZIP Codes
+st.markdown("### Hotspot ZIP Codes")
+plot_df = df.groupby(['borough', 'incident_zip']).size().reset_index(name='count')
+plot_df = plot_df.sort_values(['borough', 'count'], ascending=False)
+plot_df = plot_df.groupby('borough').head(1)
 
- fig =px.bar(data_frame= plot_df, x='incident_zip', color='borough',y ='count'
-        , labels={'incident_zip' : 'Incident ZIP Code', 'borough' :'borough Name' } , text_auto=True,
-        title='The most ZIP codes that generate complaints within each borough?',
-        color_discrete_sequence=THEME_COLORS
-        )
- fig.update_layout(plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)", font_color="#E0E0E0")
- st.plotly_chart(fig, use_container_width=True)
+plot_df['incident_zip'] = plot_df['incident_zip'].astype(str)
+
+fig = px.bar(
+    data_frame=plot_df,
+    x='incident_zip',
+    y='count',
+    color='borough',
+    labels={'incident_zip': 'Incident ZIP Code', 'borough': 'Borough Name'},
+    text_auto=True,
+    title='The most ZIP codes that generate complaints within each borough?',
+    color_discrete_sequence=px.colors.qualitative.Set2  
+)
+fig.update_layout(
+    plot_bgcolor="rgba(0,0,0,0)",
+    paper_bgcolor="rgba(0,0,0,0)",
+    font_color="#E0E0E0"
+)
+st.plotly_chart(fig, use_container_width=True)
 
  # Top 3 complaints in each borough
 
