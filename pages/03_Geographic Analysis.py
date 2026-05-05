@@ -99,7 +99,7 @@ fig = px.bar(
     labels={'incident_zip': 'Incident ZIP Code', 'borough': 'Borough Name'},
     text_auto=True,
     title='The most ZIP codes that generate complaints within each borough?',
-    color_discrete_sequence=px.colors.qualitative.Set2  
+    color_discrete_sequence=THEME_COLORS
 )
 fig.update_layout(
     plot_bgcolor="rgba(0,0,0,0)",
