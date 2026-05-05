@@ -1,0 +1,5 @@
+﻿pandas == 3.0.0
+plotly == 6.5.2
+geopy == 2.4.1
+geocoder == 1.38.1
+streamlit == 1.56.0
