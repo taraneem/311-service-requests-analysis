@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import gdown 
 
 st.set_page_config(
     page_title="NYC 311 Service Requests Analysis",
@@ -78,9 +79,7 @@ st.markdown("""
         border: none;
     }
 </style>
-""", unsafe_allow_html=True)
-
-import gdown  
+""", unsafe_allow_html=True) 
 
 @st.cache_data
 def load_data():

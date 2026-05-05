@@ -1,13 +1,12 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import gdown 
 
 st.set_page_config(layout="wide", page_title="Agency Analysis", page_icon="🏛")
 st.title("Agency Analysis")
 st.markdown("Agency Distribution and Resolution patterns")
-st.divider()
-
-import gdown  
+st.divider() 
 
 @st.cache_data
 def load_data():

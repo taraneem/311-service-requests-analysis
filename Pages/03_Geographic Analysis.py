@@ -1,14 +1,11 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-
+import gdown 
 st.set_page_config(layout="wide", page_title="Geographic Analysis", page_icon="📍")
 st.title("📍 Complaint Map")
 st.markdown("Geospatial view of a sample of 311 service requests across the city.")
 st.divider()
-
-
-import gdown  
 
 @st.cache_data
 def load_data():

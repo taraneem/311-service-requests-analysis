@@ -1,15 +1,11 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-
+import gdown 
 st.set_page_config(layout="wide", page_title="Temporal Analysis", page_icon="📅")
 st.title("Temporal Analysis")
 st.markdown("Temporal patterns of 311 service requests across the city.")
 st.divider()
-
-
-import gdown  
-
 @st.cache_data
 def load_data():
     file_id = "1GZXw_sat1A0wTSMO-wyp72-shCnLaf_a"
