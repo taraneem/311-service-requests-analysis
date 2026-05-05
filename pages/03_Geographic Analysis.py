@@ -117,26 +117,35 @@ with tab2:
 
     # Hotspot ZIP Codes
     st.markdown("### Hotspot ZIP Codes")
+
     plot_df = df.groupby(["borough", "incident_zip"]).size().reset_index(name="count")
     plot_df = plot_df.sort_values(["borough", "count"], ascending=False)
     plot_df = plot_df.groupby("borough").head(1)
-    plot_df["incident_zip"] = plot_df["incident_zip"].astype(str)
+
+    # Clean ZIP codes
+    plot_df["incident_zip"] = (
+        plot_df["incident_zip"].astype(str).str.replace(".0", "", regex=False)
+    )
 
     fig = px.bar(
         data_frame=plot_df,
-        x="incident_zip",
+        x="borough",
         y="count",
         color="borough",
-        labels={"incident_zip": "Incident ZIP Code", "borough": "Borough Name"},
-        text_auto=True,
+        text="incident_zip",
+        labels={"borough": "Borough Name", "count": "Number of Complaints"},
         title="The most ZIP codes that generate complaints within each borough?",
         color_discrete_sequence=THEME_COLORS,
     )
+
     fig.update_layout(
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
         font_color="#E0E0E0",
     )
+
+    fig.update_traces(textposition="outside")
+
     st.plotly_chart(fig, use_container_width=True)
 
     # Top 3 complaints in each borough
