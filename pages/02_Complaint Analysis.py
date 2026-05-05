@@ -85,37 +85,39 @@ with tab1:
         )
         st.plotly_chart(fig, use_container_width=True)
 
-    # What is the distribution of complaint details within the top 5 complaint type?
-    top_types = df["complaint_type"].value_counts().head(5).index
-    plot_df = df[df["complaint_type"].isin(top_types)]
-    plot_df = (
-        plot_df.groupby(["complaint_type", "complaint_detail"])
-        .size()
-        .reset_index(name="count")
-    )
-    plot_df = (
-        plot_df.sort_values("count", ascending=False).groupby("complaint_type").head(3)
-    )
+# Get top 5 complaint types
+top_types = df["complaint_type"].value_counts().head(5).index
+plot_df = df[df["complaint_type"].isin(top_types)]
 
-    fig = px.bar(
-        data_frame=plot_df,
-        y="complaint_detail",
-        x="count",
-        color="complaint_type",
-        title="Complaint Types and Details Distribution",
-        color_discrete_sequence=THEME_COLORS,
-        labels={
-            "complaint_detail": "Complaint Detail",
-            "count": "Number of Complaints",
-            "complaint_type": "Complaint Type",
-        },
-    )
-    fig.update_layout(
-        plot_bgcolor="rgba(0,0,0,0)",
-        paper_bgcolor="rgba(0,0,0,0)",
-        font_color="#E0E0E0",
-    )
-    st.plotly_chart(fig, use_container_width=True)
+# Get top 3 complaint details for EACH complaint type
+plot_df = (
+    plot_df.groupby(["complaint_type", "complaint_detail"])
+    .size()
+    .reset_index(name="count")
+    .sort_values(["complaint_type", "count"], ascending=[True, False])
+    .groupby("complaint_type")
+    .head(3)
+)
+
+fig = px.bar(
+    data_frame=plot_df,
+    y="complaint_detail",
+    x="count",
+    color="complaint_type",
+    title="Top 3 Complaint Details Within Top 5 Complaint Types",
+    color_discrete_sequence=THEME_COLORS,
+    labels={
+        "complaint_detail": "Complaint Detail",
+        "count": "Number of Complaints",
+        "complaint_type": "Complaint Type",
+    },
+)
+fig.update_layout(
+    plot_bgcolor="rgba(0,0,0,0)",
+    paper_bgcolor="rgba(0,0,0,0)",
+    font_color="#E0E0E0",
+)
+st.plotly_chart(fig, use_container_width=True)
 
 with tab2:
     col3, col4 = st.columns(2)
