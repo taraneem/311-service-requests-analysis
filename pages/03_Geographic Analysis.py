@@ -188,8 +188,8 @@ with tab2:
 
     fig = px.bar(
         plot_df,
-        y="borough",
-        x="count",
+        x="borough",
+        y="count",
         color="open_data_channel_type",
         barmode="group",
         title="Reporting Method Distribution",
