@@ -156,8 +156,8 @@ with tab2:
 
     fig = px.bar(
         plot_df,
-        y="borough",
-        x="count",
+        x="borough",  # Changed from y to x
+        y="count",  # Changed from x to y
         color="complaint_type",
         barmode="group",
         title="The most dominant complaint type per borough",
